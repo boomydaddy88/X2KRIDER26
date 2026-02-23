@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>X2KRIDER - Knight Rider Evolution</title>
-    
+    <title>X2KRIDER - Knight Rider Project</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-
     <style>
         :root {
             --primary: #ff0000;
@@ -27,7 +25,7 @@
 
         header {
             background: #000;
-            height: 180px;
+            height: 160px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -37,27 +35,25 @@
         }
 
         .scanner {
-            width: 150px;
+            width: 100px;
             height: 4px;
             background: var(--primary);
-            box-shadow: 0 0 15px var(--primary);
+            box-shadow: 0 0 10px var(--primary);
             position: absolute;
             bottom: 0;
-            animation: scan 2.5s infinite ease-in-out;
+            animation: scan 2s infinite linear;
         }
 
         @keyframes scan {
             0% { left: 0; }
-            50% { left: calc(100% - 150px); }
+            50% { left: calc(100% - 100px); }
             100% { left: 0; }
         }
 
         .lang-switch {
             position: absolute;
-            top: 15px;
-            right: 15px;
-            display: flex;
-            gap: 5px;
+            top: 10px;
+            right: 10px;
         }
 
         .lang-btn {
@@ -67,11 +63,11 @@
             padding: 5px 10px;
             cursor: pointer;
             border-radius: 4px;
-            font-size: 0.8rem;
+            font-family: 'Orbitron', sans-serif;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 800px;
             margin: 20px auto;
             padding: 0 15px;
         }
@@ -80,68 +76,51 @@
             background: var(--card);
             border-left: 4px solid var(--primary);
             padding: 20px;
-            margin-bottom: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
         }
 
-        h2 { color: var(--holo); font-size: 1.1rem; text-transform: uppercase; margin-top: 0; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        h2 { color: var(--holo); font-size: 1rem; margin-top: 0; border-bottom: 1px solid #333; padding-bottom: 8px; }
 
-        /* Facebook Button */
-        .fb-box {
-            margin-top: 15px;
-            text-align: center;
-        }
         .fb-btn {
             display: inline-block;
             background: var(--facebook);
             color: white;
             text-decoration: none;
-            padding: 12px 20px;
-            border-radius: 5px;
+            padding: 10px 15px;
+            border-radius: 4px;
             font-weight: bold;
-            font-size: 0.9rem;
-            transition: 0.3s;
-        }
-        .fb-btn:hover { opacity: 0.9; transform: scale(1.02); }
-
-        /* Galerie */
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
-        }
-        .card {
-            border: 1px solid var(--holo);
-            background: rgba(0, 242, 255, 0.03);
-            padding: 10px;
-            text-align: center;
-        }
-        .card img {
-            width: 100%;
-            border-radius: 2px;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        /* Komentáře - Disqus */
-        #disqus_thread {
-            background: #ffffff; /* Disqus vypadá lépe na světlém podkladu */
-            padding: 15px;
-            border-radius: 8px;
             margin-top: 10px;
         }
 
+        .gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .card img {
+            width: 100%;
+            border: 1px solid #444;
+        }
+
+        /* Oprava jazyků */
         .lang-hu { display: none; }
+
+        #disqus_thread {
+            background: #fff;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 15px;
+        }
 
         .counter {
             text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            border-top: 1px solid #333;
+            margin-top: 30px;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
         }
 
-        footer { text-align: center; color: #555; font-size: 0.7rem; margin-top: 20px; }
+        footer { text-align: center; color: #444; font-size: 0.7rem; margin-top: 20px; }
     </style>
 </head>
 <body>
@@ -159,60 +138,51 @@
         
         <section class="section">
             <div class="lang-cs">
-                <h2>O Projektu</h2>
-                <p>Vítejte u vývoje hry X2KRIDER. Pracujeme na nové generaci inteligentního vozu. Sledujte náš postup a zapojte se do diskuse!</p>
+                <h2>O hře X2KRIDER</h2>
+                <p>Pracujeme na oživení legendy. Tento web slouží jako deník našeho postupu.</p>
             </div>
             <div class="lang-hu">
-                <h2>A Projektről</h2>
-                <p>Üdvözöljük az X2KRIDER játék fejlesztésénél. Az intelligens autó új generációján dolgozunk. Kövesse a haladásunkat és vegyen részt a megbeszélésben!</p>
+                <h2>Az X2KRIDER játékról</h2>
+                <p>A legenda újjáélesztésén dolgozunk. Ez az oldal a haladásunk naplójaként szolgál.</p>
             </div>
         </section>
 
         <section class="section">
-            <h2 class="lang-cs">Naše Komunita</h2>
-            <h2 class="lang-hu">Közösségünk</h2>
-            <div class="fb-box">
-                <p class="lang-cs">Brzy zde najdete odkaz na naši Facebook skupinu!</p>
-                <p class="lang-hu">Hamarosan itt találja a Facebook csoportunk linkjét!</p>
-                <a href="#" class="fb-btn">Facebook Group</a>
-            </div>
+            <h2 class="lang-cs">Komunita</h2>
+            <h2 class="lang-hu">Közösség</h2>
+            <p class="lang-cs">Sleduj náš Facebook pro novinky:</p>
+            <p class="lang-hu">Kövesse Facebookunkat a hírekért:</p>
+            <a href="#" class="fb-btn">Facebook Group</a>
         </section>
 
         <section class="section">
-            <h2 class="lang-cs">Vizuální koncepty</h2>
-            <h2 class="lang-hu">Vizuális koncepciók</h2>
+            <h2 class="lang-cs">Holografické náhledy</h2>
+            <h2 class="lang-hu">Holografikus nézetek</h2>
             <div class="gallery">
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=600" alt="Scanner">
-                    <span>X2K SCANNER</span>
-                </div>
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=600" alt="AI Interior">
-                    <span>AI INTERIOR</span>
-                </div>
+                <div class="card"><img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600" alt="Scanner"></div>
+                <div class="card"><img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600" alt="AI"></div>
             </div>
         </section>
 
         <section class="section">
-            <h2 class="lang-cs">Diskuse</h2>
-            <h2 class="lang-hu">Diszkusszió</h2>
+            <h2 class="lang-cs">Diskuze</h2>
+            <h2 class="lang-hu">Megbeszélés</h2>
             <div id="disqus_thread"></div>
         </section>
 
         <div class="counter">
-            <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fboomydaddy88.github.io%2FX2KRIDER26&count_bg=%23E74C3C&title_bg=%23222222&icon=&icon_color=%23E7E7E7&title=Návštěvy&edge_flat=false" alt="Počítadlo"/>
+            <p style="font-size: 0.7rem; color: #888;">VISITOR COUNTER</p>
+            <img src="https://count.getloli.com/get/@x2krider-boomy?theme=rule_734" alt="Počítadlo"/>
         </div>
 
     </div>
 
-    <footer>X2KRIDER - KNIGHT INDUSTRIES 2026</footer>
+    <footer>X2KRIDER SYSTEM 2026</footer>
 
     <script>
-        // PŘEPÍNÁNÍ JAZYKŮ
         function setLang(lang) {
             const cs = document.querySelectorAll('.lang-cs');
             const hu = document.querySelectorAll('.lang-hu');
-            
             if (lang === 'hu') {
                 cs.forEach(el => el.style.display = 'none');
                 hu.forEach(el => el.style.display = 'block');
@@ -222,14 +192,9 @@
             }
         }
 
-        // DISQUS (Komentáře)
-        var disqus_config = function () {
-            this.page.url = window.location.href;
-            this.page.identifier = 'x2krider_v2_final';
-        };
+        // DISQUS
         (function() {
             var d = document, s = d.createElement('script');
-            // SEM DÁŠ SVÉ DISQUS SHORTNAME
             s.src = 'https://x2krider-vyvoj.disqus.com/embed.js';
             s.setAttribute('data-timestamp', +new Date());
             (d.head || d.body).appendChild(s);
