@@ -3,7 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>X2KRIDER - Development & Community</title>
+    
+    <title>X2KRIDER - Knight Rider Evolution</title>
+    <meta name="description" content="Oficiální stránka vývoje hry X2KRIDER. Nová generace Knight Industries v češtině a maďarštině.">
+    <meta property="og:title" content="X2KRIDER - Game Dev Blog">
+    <meta property="og:description" content="Sleduj vývoj nové generace K.I.T.T. Komentuj, sleduj a zapoj se!">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1000">
+
     <style>
         :root {
             --primary-color: #ff0000;
@@ -20,22 +26,41 @@
             background-color: var(--bg-dark);
             color: var(--text-light);
             margin: 0;
+            line-height: 1.6;
         }
 
         header {
-            background: #000;
-            height: 25vh;
+            background: black;
+            height: 40vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            position: relative;
             border-bottom: 2px solid var(--primary-color);
+            text-align: center;
+        }
+
+        .scanner-line {
+            width: 200px;
+            height: 6px;
+            background: var(--primary-color);
+            box-shadow: 0 0 15px var(--primary-color);
+            position: absolute;
+            bottom: 0;
+            animation: scan 3s infinite ease-in-out;
+        }
+
+        @keyframes scan {
+            0% { left: 0; }
+            50% { left: calc(100% - 200px); }
+            100% { left: 0; }
         }
 
         .lang-switch {
             position: fixed;
-            top: 15px;
-            right: 15px;
+            top: 20px;
+            right: 20px;
             z-index: 1000;
         }
 
@@ -43,56 +68,86 @@
             background: #222;
             color: var(--holo-blue);
             border: 1px solid var(--holo-blue);
-            padding: 5px 10px;
+            padding: 8px 12px;
             cursor: pointer;
-            border-radius: 4px;
+            border-radius: 5px;
+            font-weight: bold;
         }
 
         .container {
-            max-width: 850px;
-            margin: 20px auto;
-            padding: 0 15px;
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px;
         }
 
         .section {
-            margin-bottom: 30px;
-            padding: 20px;
+            margin-bottom: 40px;
+            padding: 25px;
             background: var(--card-bg);
             border-left: 4px solid var(--primary-color);
+            box-shadow: 0 0 15px rgba(255,0,0,0.1);
         }
 
-        h2 { color: var(--holo-blue); font-size: 1.2rem; margin-top: 0; }
+        h1 { font-size: 3.5rem; margin: 0; text-shadow: 0 0 15px var(--primary-color); }
+        h2 { color: var(--holo-blue); text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 10px; }
 
-        /* Sociální sítě tlačítka */
-        .social-links {
-            display: flex;
-            gap: 15px;
+        /* Progress bary vývoje */
+        .status-box {
+            background: #1a1a1a;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+        .progress-bar {
+            background: #333;
+            height: 12px;
+            border-radius: 6px;
+            margin-top: 8px;
+        }
+        .progress-fill {
+            background: var(--primary-color);
+            height: 100%;
+            border-radius: 6px;
+            box-shadow: 0 0 10px var(--primary-color);
+        }
+
+        /* Galerie */
+        .holo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
             margin-top: 20px;
         }
-
-        .social-btn {
-            flex: 1;
+        .holo-card {
+            border: 1px solid var(--holo-blue);
             padding: 10px;
+            background: rgba(0, 242, 255, 0.05);
             text-align: center;
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-            border-radius: 5px;
-            font-size: 0.9rem;
+            transition: 0.3s;
         }
+        .holo-card:hover { transform: scale(1.03); box-shadow: 0 0 20px var(--holo-blue); }
+        .holo-card img { width: 100%; filter: brightness(1.1); }
 
+        /* Sociální sítě */
+        .social-links { display: flex; gap: 15px; margin-top: 20px; }
+        .social-btn {
+            flex: 1; padding: 12px; text-align: center; text-decoration: none; 
+            color: white; border-radius: 5px; font-weight: bold;
+        }
         .btn-discord { background: var(--discord); }
         .btn-youtube { background: var(--youtube); }
 
-        /* Disqus pole - upraveno pro tmavý režim */
+        /* Komentáře */
         #disqus_thread {
-            background: #ffffff; /* Disqus vypadá nejlépe na světlém, nebo ho v nastavení Disqus přepni na Dark */
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 15px;
+            background: #fdfdfd; 
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
         }
 
-        .counter-box { text-align: center; padding: 20px; }
+        .counter-box { text-align: center; margin: 50px 0; border-top: 1px solid #333; padding-top: 20px; }
+
+        footer { text-align: center; padding: 40px; background: #000; font-size: 0.8rem; color: #666; }
 
         [data-lang="hu"] { display: none; }
     </style>
@@ -107,55 +162,67 @@
 
     <header>
         <h1>X2KRIDER</h1>
+        <p class="lang-cs">Nová generace Knight Industries</p>
+        <p class="lang-hu">A Knight Industries új generációja</p>
+        <div class="scanner-line"></div>
     </header>
 
     <div class="container">
         
         <section class="section">
-            <h2 class="lang-cs">Sleduj nás</h2>
-            <h2 class="lang-hu">Kövess minket</h2>
-            <div class="social-links">
-                <a href="TVUJ_ODKAZ_NA_YOUTUBE" class="social-btn btn-youtube">YouTube</a>
-                <a href="TVUJ_ODKAZ_NA_DISCORD" class="social-btn btn-discord">Discord</a>
+            <h2 class="lang-cs">O Projektu</h2>
+            <h2 class="lang-hu">A Projektről</h2>
+            <p class="lang-cs">Pracujeme na moderním pojetí legendárního vozu K.I.T.T. Vývoj se zaměřuje na integraci pokročilé AI a holografických systémů.</p>
+            <p class="lang-hu">A legendás K.I.T.T. autó modern koncepcióján dolgozunk. A fejlesztés a fejlett AI és a holografikus rendszerek integrálására összpontosít.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="lang-cs">Stav vývoje</h2>
+            <h2 class="lang-hu">Fejlesztési állapot</h2>
+            
+            <div class="status-box">
+                <span class="lang-cs">Grafika a Modely</span><span class="lang-hu">Grafika és Modellek</span>
+                <div class="progress-bar"><div class="progress-fill" style="width: 70%;"></div></div>
+            </div>
+            <div class="status-box">
+                <span class="lang-cs">Programování AI</span><span class="lang-hu">AI Programozás</span>
+                <div class="progress-bar"><div class="progress-fill" style="width: 45%;"></div></div>
+            </div>
+            <div class="status-box">
+                <span class="lang-cs">Zvukové efekty</span><span class="lang-hu">Hangeffektusok</span>
+                <div class="progress-bar"><div class="progress-fill" style="width: 30%;"></div></div>
             </div>
         </section>
 
         <section class="section">
-            <h2 class="lang-cs">Komentáře a dotazy</h2>
-            <h2 class="lang-hu">Hozzászólások és kérdések</h2>
-            <p class="lang-cs" style="font-size: 0.8rem;">Tvůj názor nás zajímá! Napiš nám přímo sem:</p>
-            <p class="lang-hu" style="font-size: 0.8rem;">Érdekel minket a véleményed! Írj nekünk közvetlenül ide:</p>
-            
+            <h2 class="lang-cs">Holografické Rozhraní</h2>
+            <h2 class="lang-hu">Holografikus Interfész</h2>
+            <div class="holo-gallery">
+                <div class="holo-card">
+                    <img src="http://googleusercontent.com/image_collection/image_retrieval/1535169853346740626_0" alt="HUD">
+                    <p>Scanner System</p>
+                </div>
+                <div class="holo-card">
+                    <img src="http://googleusercontent.com/image_collection/image_retrieval/7953206466692028491_2" alt="Interior">
+                    <p>Interior K.I.T.T. X2K</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="lang-cs">Sledujte nás</h2>
+            <h2 class="lang-hu">Kövessen minket</h2>
+            <div class="social-links">
+                <a href="#" class="social-btn btn-youtube">YouTube Channel</a>
+                <a href="#" class="social-btn btn-discord">Discord Server</a>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="lang-cs">Komunita</h2>
+            <h2 class="lang-hu">Közösség</h2>
             <div id="disqus_thread"></div>
         </section>
 
         <div class="counter-box">
-            <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fboomydaddy88.github.io%2FX2KRIDER26&count_bg=%23E74C3C&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=Návštěvy&edge_flat=false" alt="Počítadlo"/>
-        </div>
-
-    </div>
-
-    <script>
-        function setLang(lang) {
-            const cs = document.querySelectorAll('.lang-cs');
-            const hu = document.querySelectorAll('.lang-hu');
-            cs.forEach(e => e.style.display = lang === 'cs' ? 'block' : 'none');
-            hu.forEach(e => e.style.display = lang === 'hu' ? 'block' : 'none');
-        }
-        setLang('cs');
-
-        // DISQUS INTEGRACE
-        var disqus_config = function () {
-            this.page.url = window.location.href;
-            this.page.identifier = 'x2krider_comments';
-        };
-        (function() {
-            var d = document, s = d.createElement('script');
-            // TADY NAHRAĎ 'x2krider-vyvoj' SVÝM JMÉNEM Z DISQUS
-            s.src = 'https://x2krider-vyvoj.disqus.com/embed.js';
-            s.setAttribute('data-timestamp', +new Date());
-            (d.head || d.body).appendChild(s);
-        })();
-    </script>
-</body>
-</html>
+            <img src="
