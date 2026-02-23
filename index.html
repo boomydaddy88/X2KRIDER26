@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>X2KRIDER - Knight Rider Project</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <title>X2KRIDER - Tactical Interface</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #ff0000;
             --bg: #050505;
-            --card: #111111;
+            --card: #0a0a0a;
             --text: #f0f0f0;
             --holo: #00f2ff;
             --facebook: #1877f2;
@@ -25,7 +25,7 @@
 
         header {
             background: #000;
-            height: 160px;
+            height: 150px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -35,18 +35,18 @@
         }
 
         .scanner {
-            width: 100px;
+            width: 120px;
             height: 4px;
             background: var(--primary);
-            box-shadow: 0 0 10px var(--primary);
+            box-shadow: 0 0 15px var(--primary);
             position: absolute;
             bottom: 0;
-            animation: scan 2s infinite linear;
+            animation: scan 2s infinite ease-in-out;
         }
 
         @keyframes scan {
             0% { left: 0; }
-            50% { left: calc(100% - 100px); }
+            50% { left: calc(100% - 120px); }
             100% { left: 0; }
         }
 
@@ -54,16 +54,19 @@
             position: absolute;
             top: 10px;
             right: 10px;
+            display: flex;
+            gap: 10px;
         }
 
         .lang-btn {
-            background: #222;
+            background: #111;
             color: var(--holo);
             border: 1px solid var(--holo);
-            padding: 5px 10px;
+            padding: 5px 12px;
             cursor: pointer;
-            border-radius: 4px;
             font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            border-radius: 2px;
         }
 
         .container {
@@ -74,53 +77,81 @@
 
         .section {
             background: var(--card);
+            border: 1px solid #222;
             border-left: 4px solid var(--primary);
             padding: 20px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
         }
 
-        h2 { color: var(--holo); font-size: 1rem; margin-top: 0; border-bottom: 1px solid #333; padding-bottom: 8px; }
+        .section::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: repeating-linear-gradient(0deg, rgba(0,0,0,0.05) 0px, rgba(0,0,0,0.05) 1px, transparent 2px);
+            pointer-events: none;
+        }
+
+        h2 { color: var(--holo); font-size: 1rem; text-transform: uppercase; margin-top: 0; border-bottom: 1px solid #222; padding-bottom: 10px; }
 
         .fb-btn {
             display: inline-block;
             background: var(--facebook);
             color: white;
             text-decoration: none;
-            padding: 10px 15px;
-            border-radius: 4px;
+            padding: 12px 20px;
+            border-radius: 2px;
             font-weight: bold;
             margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .gallery {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
         }
 
         .card img {
             width: 100%;
-            border: 1px solid #444;
+            border: 1px solid var(--holo);
+            filter: grayscale(0.3) contrast(1.2);
         }
 
-        /* Oprava jazyků */
         .lang-hu { display: none; }
 
+        /* Disqus styling */
         #disqus_thread {
-            background: #fff;
-            padding: 10px;
-            border-radius: 4px;
-            margin-top: 15px;
-        }
-
-        .counter {
-            text-align: center;
-            margin-top: 30px;
+            background: rgba(255,255,255,0.9);
             padding: 15px;
-            background: rgba(255,255,255,0.05);
+            border-radius: 4px;
         }
 
-        footer { text-align: center; color: #444; font-size: 0.7rem; margin-top: 20px; }
+        /* SCI-FI COUNTER */
+        .counter-wrap {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            border: 1px solid #333;
+            background: #000;
+        }
+
+        .counter-label {
+            font-family: 'Share Tech Mono', monospace;
+            color: var(--primary);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .scifi-counter {
+            display: inline-block;
+            filter: hue-rotate(130deg) brightness(1.5); /* Změní barvu na modro-zelenou scifi */
+        }
+
+        footer { text-align: center; color: #333; font-size: 0.6rem; padding: 20px; letter-spacing: 3px; }
     </style>
 </head>
 <body>
@@ -130,7 +161,7 @@
             <button class="lang-btn" onclick="setLang('cs')">CZ</button>
             <button class="lang-btn" onclick="setLang('hu')">HU</button>
         </div>
-        <h1>X2KRIDER</h1>
+        <h1 style="letter-spacing: 5px;">X2KRIDER</h1>
         <div class="scanner"></div>
     </header>
 
@@ -138,29 +169,29 @@
         
         <section class="section">
             <div class="lang-cs">
-                <h2>O hře X2KRIDER</h2>
-                <p>Pracujeme na oživení legendy. Tento web slouží jako deník našeho postupu.</p>
+                <h2>Systémový Status</h2>
+                <p>Inicializace projektu Knight Industries X2K. Všechny moduly jsou v režimu vývoje.</p>
             </div>
             <div class="lang-hu">
-                <h2>Az X2KRIDER játékról</h2>
-                <p>A legenda újjáélesztésén dolgozunk. Ez az oldal a haladásunk naplójaként szolgál.</p>
+                <h2>Rendszerállapot</h2>
+                <p>Knight Industries X2K projekt inicializálása. Minden modul fejlesztési módban van.</p>
             </div>
         </section>
 
         <section class="section">
             <h2 class="lang-cs">Komunita</h2>
             <h2 class="lang-hu">Közösség</h2>
-            <p class="lang-cs">Sleduj náš Facebook pro novinky:</p>
-            <p class="lang-hu">Kövesse Facebookunkat a hírekért:</p>
-            <a href="#" class="fb-btn">Facebook Group</a>
+            <p class="lang-cs">Připravujeme Facebook skupinu pro fanoušky projektu.</p>
+            <p class="lang-hu">Facebook csoportot készítünk a projekt rajongói számára.</p>
+            <a href="#" class="fb-btn">Facebook Link</a>
         </section>
 
         <section class="section">
-            <h2 class="lang-cs">Holografické náhledy</h2>
-            <h2 class="lang-hu">Holografikus nézetek</h2>
+            <h2 class="lang-cs">Vizuální data</h2>
+            <h2 class="lang-hu">Vizuális adatok</h2>
             <div class="gallery">
-                <div class="card"><img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600" alt="Scanner"></div>
-                <div class="card"><img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600" alt="AI"></div>
+                <div class="card"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800" alt="Tech"></div>
+                <div class="card"><img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800" alt="Grid"></div>
             </div>
         </section>
 
@@ -170,14 +201,16 @@
             <div id="disqus_thread"></div>
         </section>
 
-        <div class="counter">
-            <p style="font-size: 0.7rem; color: #888;">VISITOR COUNTER</p>
-            <img src="https://count.getloli.com/get/@x2krider-boomy?theme=rule_734" alt="Počítadlo"/>
+        <div class="counter-wrap">
+            <div class="counter-label">ANALYZING VISITORS...</div>
+            <div class="scifi-counter">
+                <img src="https://count.getloli.com/get/@x2krider-tactical?theme=asoul" alt="Counter" style="filter: invert(1) brightness(2);">
+            </div>
         </div>
 
     </div>
 
-    <footer>X2KRIDER SYSTEM 2026</footer>
+    <footer>TRANSMISSION END // 2026</footer>
 
     <script>
         function setLang(lang) {
@@ -192,7 +225,11 @@
             }
         }
 
-        // DISQUS
+        // DISQUS CONFIG
+        var disqus_config = function () {
+            this.page.url = window.location.href;
+            this.page.identifier = 'x2krider_tactical_v1';
+        };
         (function() {
             var d = document, s = d.createElement('script');
             s.src = 'https://x2krider-vyvoj.disqus.com/embed.js';
